@@ -1,6 +1,10 @@
 # construcciondesof2-4bytes
 
-Tecnologia 
+## Integrantes
+### Keyli Michell Londoño
+### Omar Tamara
+### Sebastián Sánchez Parra
+### Miguel Ángel Quintero
 
-
-Integrantes
+## Tecnologia 
+Java Springboot
