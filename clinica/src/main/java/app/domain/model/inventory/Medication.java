@@ -1,5 +1,7 @@
 package app.domain.model.inventory;
 
-public class Medication {
-    // TODO: Attributes: id, name, unitCost
+public class Medication extends InventoryItem {
+    public Medication(String id, String name, double price) {
+        super(id, name, price);
+    }
 }
