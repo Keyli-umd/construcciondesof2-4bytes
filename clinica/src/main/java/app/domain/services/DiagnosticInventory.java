@@ -1,17 +1,18 @@
-// =======================
-// ProcedureInventory
+
+    // =======================
+// DiagnosticInventory
 // =======================
 
-package app.domain.repository;
+package app.domain.services;
 
-public class ProcedureInventory {
+public class DiagnosticInventory {
     private int id;
     private String name;
     private double cost;
 
-    public ProcedureInventory() {}
+    public DiagnosticInventory() {}
 
-    public ProcedureInventory(int id, String name, double cost) {
+    public DiagnosticInventory(int id, String name, double cost) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -28,10 +29,11 @@ public class ProcedureInventory {
 
     @Override
     public String toString() {
-        return "ProcedureInventory{" +
+        return "DiagnosticInventory{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", cost=" + cost +
                 '}';
     }
 }
+

@@ -1,7 +1,7 @@
 // =======================
 // ProcedureOrderDetail
 // =======================
-package app.domain.repository;
+package app.domain.services;
 public class ProcedureOrderDetail extends OrderItem {
     private String procedureName;
 
