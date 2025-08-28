@@ -1,54 +1,36 @@
 package app.domain.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class MedicalCare {
-    private String id;
-    private LocalDateTime dateTime;
-    private Doctor doctor;
-    private Nurse nurse;
+    private LocalDate date;
+    private String doctorId;
+    private String reason;
+    private String symptoms;
     private String diagnosis;
-    private String treatment;
 
-    public MedicalCare() { }
-
-    public MedicalCare(String id, LocalDateTime dateTime, Doctor doctor,
-                       Nurse nurse, String diagnosis, String treatment) {
-        this.id = id;
-        this.dateTime = dateTime;
-        this.doctor = doctor;
-        this.nurse = nurse;
+    public MedicalCare(LocalDate date, String doctorId, String reason, String symptoms, String diagnosis) {
+        this.date = date;
+        this.doctorId = doctorId;
+        this.reason = reason;
+        this.symptoms = symptoms;
         this.diagnosis = diagnosis;
-        this.treatment = treatment;
     }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public LocalDateTime getDateTime() { return dateTime; }
-    public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
-
-    public Doctor getDoctor() { return doctor; }
-    public void setDoctor(Doctor doctor) { this.doctor = doctor; }
-
-    public Nurse getNurse() { return nurse; }
-    public void setNurse(Nurse nurse) { this.nurse = nurse; }
-
+    public LocalDate getDate() { return date; }
+    public String getDoctorId() { return doctorId; }
+    public String getReason() { return reason; }
+    public String getSymptoms() { return symptoms; }
     public String getDiagnosis() { return diagnosis; }
-    public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
-
-    public String getTreatment() { return treatment; }
-    public void setTreatment(String treatment) { this.treatment = treatment; }
 
     @Override
     public String toString() {
         return "MedicalCare{" +
-               "id='" + id + '\'' +
-                ", dateTime=" + dateTime +
-                ", doctor=" + doctor +
-                ", nurse=" + nurse +
+                "date=" + date +
+                ", doctorId='" + doctorId + '\'' +
+                ", reason='" + reason + '\'' +
+                ", symptoms='" + symptoms + '\'' +
                 ", diagnosis='" + diagnosis + '\'' +
-                ", treatment='" + treatment + '\'' +
                 '}';
     }
 }

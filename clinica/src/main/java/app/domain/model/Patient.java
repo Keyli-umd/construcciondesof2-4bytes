@@ -15,14 +15,14 @@ public class Patient extends User {
 
     public Patient() {
         super();
-        setRole(Role.PATIENTS);
+        setRole(Role.PATIENT);
         this.medicalHistories = new ArrayList<>();
     }
 
     public Patient(String fullName, String idNumber, String email, String phone,
                    LocalDate birthDate, String address, String healthInsuranceProvider,
                    EmergencyContact emergencyContact, MedicalInsurance medicalInsurance) {
-        super(fullName, idNumber, email, phone, birthDate, address, Role.PATIENTS);
+        super(fullName, idNumber, email, phone, birthDate, address, Role.PATIENT);
         this.healthInsuranceProvider = healthInsuranceProvider;
         this.emergencyContact = emergencyContact;
         this.medicalInsurance = medicalInsurance;

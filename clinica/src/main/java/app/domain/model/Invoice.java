@@ -1,7 +1,7 @@
 // =======================
 // Invoice
 // =======================
-package app.domain.services;
+package app.domain.model;
 
 import java.util.Date;
 
