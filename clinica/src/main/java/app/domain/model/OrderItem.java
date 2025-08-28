@@ -1,7 +1,7 @@
 // =======================
 // Abstract OrderItem
 // =======================
-package app.domain.services;
+package app.domain.model;
 public abstract class OrderItem {
     private int id;
     private String description;

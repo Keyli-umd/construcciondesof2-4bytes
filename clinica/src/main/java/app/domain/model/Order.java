@@ -3,7 +3,6 @@ package app.domain.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import app.domain.services.OrderItem;
 
 public class Order {
 

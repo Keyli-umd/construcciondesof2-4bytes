@@ -1,20 +1,18 @@
 // =======================
-// ProcedureInventory
+// Specialty
 // =======================
 
-package app.domain.services;
+package app.domain.model;
 
-public class ProcedureInventory {
+public class Specialty {
     private int id;
     private String name;
-    private double cost;
 
-    public ProcedureInventory() {}
+    public Specialty() {}
 
-    public ProcedureInventory(int id, String name, double cost) {
+    public Specialty(int id, String name) {
         this.id = id;
         this.name = name;
-        this.cost = cost;
     }
 
     public int getId() { return id; }
@@ -23,15 +21,11 @@ public class ProcedureInventory {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public double getCost() { return cost; }
-    public void setCost(double cost) { this.cost = cost; }
-
     @Override
     public String toString() {
-        return "ProcedureInventory{" +
+        return "Specialty{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", cost=" + cost +
                 '}';
     }
 }

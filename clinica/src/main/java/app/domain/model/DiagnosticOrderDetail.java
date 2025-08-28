@@ -1,7 +1,8 @@
 // =======================
 // DiagnosticOrderDetail
 // =======================
-package app.domain.services;
+package app.domain.model;
+
 public class DiagnosticOrderDetail extends OrderItem {
     private String examName;
 

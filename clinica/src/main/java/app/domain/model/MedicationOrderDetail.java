@@ -2,7 +2,8 @@
 // MedicationOrderDetail
 // =======================
 
-package app.domain.services;
+package app.domain.model;
+
 public class MedicationOrderDetail extends OrderItem {
     private String medicationName;
     private int quantity;

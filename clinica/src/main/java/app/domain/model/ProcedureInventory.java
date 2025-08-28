@@ -1,18 +1,20 @@
 // =======================
-// MedicationInventory
+// ProcedureInventory
 // =======================
-package app.domain.services;
-public class MedicationInventory {
+
+package app.domain.model;
+
+public class ProcedureInventory {
     private int id;
     private String name;
-    private int stock;
+    private double cost;
 
-    public MedicationInventory() {}
+    public ProcedureInventory() {}
 
-    public MedicationInventory(int id, String name, int stock) {
+    public ProcedureInventory(int id, String name, double cost) {
         this.id = id;
         this.name = name;
-        this.stock = stock;
+        this.cost = cost;
     }
 
     public int getId() { return id; }
@@ -21,15 +23,15 @@ public class MedicationInventory {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public int getStock() { return stock; }
-    public void setStock(int stock) { this.stock = stock; }
+    public double getCost() { return cost; }
+    public void setCost(double cost) { this.cost = cost; }
 
     @Override
     public String toString() {
-        return "MedicationInventory{" +
+        return "ProcedureInventory{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", stock=" + stock +
+                ", cost=" + cost +
                 '}';
     }
 }

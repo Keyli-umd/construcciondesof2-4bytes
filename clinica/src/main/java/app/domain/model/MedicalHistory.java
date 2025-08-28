@@ -4,29 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalHistory {
-    private String id;
-    private List<MedicalCare> medicalCareRecords;
+    private String patientId;  // clave del paciente
+    private List<MedicalCare> visits;
 
-    public MedicalHistory() {
-        this.medicalCareRecords = new ArrayList<>();
+    public MedicalHistory(String patientId) {
+        this.patientId = patientId;
+        this.visits = new ArrayList<>();
     }
 
-    public MedicalHistory(String id) {
-        this.id = id;
-        this.medicalCareRecords = new ArrayList<>();
+    public String getPatientId() { return patientId; }
+    public List<MedicalCare> getVisits() { return visits; }
+
+    public void addVisit(MedicalCare care) {
+        visits.add(care);
     }
-
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public List<MedicalCare> getMedicalCareRecords() { return medicalCareRecords; }
-    public void addMedicalCare(MedicalCare care) { this.medicalCareRecords.add(care); }
 
     @Override
     public String toString() {
         return "MedicalHistory{" +
-                "id='" + id + '\'' +
-                ", medicalCareRecords=" + medicalCareRecords +
+                "patientId='" + patientId + '\'' +
+                ", visits=" + visits +
                 '}';
     }
 }
