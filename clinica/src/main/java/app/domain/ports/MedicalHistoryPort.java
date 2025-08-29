@@ -2,7 +2,7 @@ package app.domain.ports;
 
 import java.time.LocalDateTime;
 
-public interface MedicalRecordPort {
+public interface MedicalHistoryPort {
     String saveAttention(String patientIdCard, LocalDateTime dateTime, String doctorIdCard, String reason,
             String symptoms, String diagnosis) throws Exception;
 
