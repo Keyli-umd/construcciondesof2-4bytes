@@ -1,43 +1,25 @@
 package app.domain.model;
 
 public class EmergencyContact {
-    private String name;
-    private String telephone ;
-    private String kinship;
+    private String fullName;
+    private String relation;
+    private String phoneNumber;
 
-    public EmergencyContact() { }
+    public EmergencyContact(String fullName, String relation, String phoneNumber) {
+        validatePhoneNumber(phoneNumber);
 
-    public EmergencyContact(String name, String telephone, String kinship) {
-        this.name = name;
-        this.telephone = telephone;
-        this.kinship = kinship;
-
+        this.fullName = fullName;
+        this.relation = relation;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getName() { return name; }
-    public void setName(String name) {if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be empty.");
+    private void validatePhoneNumber(String phone) {
+        if (!phone.matches("\\d{10}")) {
+            throw new IllegalArgumentException("El numero de emergencia debe tener 10 digitos ");
         }
-        this.name = name;
     }
 
-    public String getTelephone() { return telephone; }
-    public void setTelephone(String telephone) {
-        if (telephone == null || telephone.length() != 10 || !telephone.chars().allMatch(Character::isDigit)) {
-        throw new IllegalArgumentException("Emergency contact phone must be exactly 10 digits.");
-        }
-        this.telephone = telephone;
-    }
-
-    public String getKinship() { return kinship; }
-    public void setKinship(String kinship) { this.kinship = kinship; }
-
-    @Override
-    public String toString() {
-        return "EmergencyContact{" +
-                "name='" + name + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", kinship='" + kinship + '\'' +
-                '}';
-    }
+    public String getFullName() { return fullName; }
+    public String getRelation() { return relation; }
+    public String getPhoneNumber() { return phoneNumber; }
 }
