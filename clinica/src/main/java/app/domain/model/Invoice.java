@@ -1,38 +1,44 @@
-// =======================
-// Invoice
-// =======================
 package app.domain.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Invoice {
-    private int id;
-    private Date date;
-    private double total;
+    private String patientName;
+    private int patientAge;
+    private String patientId;
+    private String doctorName;
+    private String insuranceCompany;
+    private String policyNumber;
+    private long policyDaysLeft;
+    private LocalDate policyEndDate;
+    private double totalCost;
 
-    public Invoice() {}
-
-    public Invoice(int id, Date date, double total) {
-        this.id = id;
-        this.date = date;
-        this.total = total;
+    public Invoice(String patientName, int patientAge, String patientId,
+                   String doctorName, String insuranceCompany, String policyNumber,
+                   long policyDaysLeft, LocalDate policyEndDate, double totalCost) {
+        this.patientName = patientName;
+        this.patientAge = patientAge;
+        this.patientId = patientId;
+        this.doctorName = doctorName;
+        this.insuranceCompany = insuranceCompany;
+        this.policyNumber = policyNumber;
+        this.policyDaysLeft = policyDaysLeft;
+        this.policyEndDate = policyEndDate;
+        this.totalCost = totalCost;
     }
-
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
-    public Date getDate() { return date; }
-    public void setDate(Date date) { this.date = date; }
-
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
 
     @Override
     public String toString() {
-        return "Invoice{" +
-                "id=" + id +
-                ", date=" + date +
-                ", total=" + total +
+        return "Factura{" +
+                "Nombre del paciente ='" + patientName + '\'' +
+                ", Edad=" + patientAge +
+                ", Id='" + patientId + '\'' +
+                ", Nombre del doctor='" + doctorName + '\'' +
+                ", Compañia de seguros='" + insuranceCompany + '\'' +
+                ", Numero de poliza='" + policyNumber + '\'' +
+                ", Dias restantes de la poliza=" + policyDaysLeft +
+                ", Fecha de vencimiento poliza=" + policyEndDate +
+                ", Costo Total=" + totalCost +
                 '}';
     }
 }
