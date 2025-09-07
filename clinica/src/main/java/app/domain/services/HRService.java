@@ -1,57 +1,67 @@
 package app.domain.services;
 
-import app.domain.model.Employee;
-import app.domain.model.enums.Role;
+import app.domain.model.User;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class HRService {
-    private final List<Employee> employees;
+    private final List<User> users = new ArrayList<>();
 
-    public HRService() {
-        this.employees = new ArrayList<>();
-    }
-
-    // Crear un nuevo empleado
-    public void createEmployee(Employee employee) {
-        // Validación de unicidad de cédula
-        Optional<Employee> exists = employees.stream()
-                .filter(e -> e.getIdCard().equals(employee.getIdCard()))
-                .findFirst();
-        if (exists.isPresent()) {
-            throw new IllegalArgumentException("Ya existe un empleado con dicha id");
+    // Crear usuario
+    public void createUser(User user) {
+        // Validar unicidad de cédula, correo y username
+        for (User u : users) {
+            if (u.getIdNumber().equals(user.getIdNumber())) {
+                throw new IllegalArgumentException("El ID debe ser unico.");
+            }
+            if (u.getEmail().equalsIgnoreCase(user.getEmail())) {
+                throw new IllegalArgumentException("El Email debe ser unico.");
+            }
+            if (u.getUsername().equalsIgnoreCase(user.getUsername())) {
+                throw new IllegalArgumentException("El nombre de usuario debe ser unico.");
+            }
         }
-        employees.add(employee);
-        System.out.println("Empleado creado: " + employee);
+        users.add(user);
+        System.out.println("Usuario creado satisfactoriamente: " + user.getFullName());
     }
 
-    // Eliminar empleado
-    public boolean deleteEmployee(String idCard) {
-        return employees.removeIf(e -> e.getIdCard().equals(idCard));
-    }
-
-    // Asignar o actualizar rol
-    public void updateRole(String idCard, Role newRole) {
-        employees.stream()
-                .filter(e -> e.getIdCard().equals(idCard))
-                .findFirst()
-                .ifPresentOrElse(
-                        e -> {
-                            e.setRole(newRole);
-                            System.out.println("Rol actualizado: " + e);
-                        },
-                        () -> { throw new IllegalArgumentException("Empleado no encontrado"); }
-                );
-    }
-
-    // Listar empleados
-    public List<Employee> listEmployees() {
-        return new ArrayList<>(employees);
-    }
-        public Object getPatientInfo(String id) {
-        throw new UnsupportedOperationException(
-            "Recursos Humanos no puede acceder a esta informacion"
-        );
+    // Actualizar usuario
+    public void updateUser(String idNumber, User updatedUser) {
+        for (int i = 0; i < users.size(); i++) {
+            User existing = users.get(i);
+            if (existing.getIdNumber().equals(idNumber)) {
+                users.set(i, updatedUser);
+                System.out.println("Usuario actualizado satisfactoriamente: " + updatedUser.getFullName());
+                return;
+            }
         }
+        throw new IllegalArgumentException("El usuario con ID " + idNumber + " No se encuentra.");
+    }
+
+    // Eliminar usuario
+    public void deleteUser(String idNumber) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getIdNumber().equals(idNumber)) {
+                System.out.println("Usuario eliminado satisfactoriamente: " + users.get(i).getFullName());
+                users.remove(i);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Usuario con ID " + idNumber + " mo ha sido encontrado.");
+    }
+
+    // Buscar usuario por cédula
+    public User getUserById(String idNumber) {
+        for (User u : users) {
+            if (u.getIdNumber().equals(idNumber)) {
+                return u;
+            }
+        }
+        throw new IllegalArgumentException("Usuario con ID " + idNumber + " no ha sido encontrado");
+    }
+
+    // Listar todos los usuarios
+    public List<User> getAllUsers() {
+        return new ArrayList<>(users);
+    }
 }

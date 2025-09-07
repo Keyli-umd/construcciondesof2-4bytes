@@ -5,6 +5,5 @@ public enum Role {
     ADMINISTRATIVE_STAFF,
     INFORMATION_SUPPORT,
     NURSES,
-    DOCTORS,
-    PATIENT
+    DOCTORS
 }
