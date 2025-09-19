@@ -1,49 +1,37 @@
 package app.domain.services;
 
-import app.domain.model.Patient;
-import app.domain.model.Visit;
-import app.domain.model.MedicalOrder;
-import java.util.List;
+import app.domain.ports.NursePort;
+import java.time.LocalDateTime;
 
-public class NurseService {
-    private final List<Patient> patients;
-    private final List<MedicalOrder> orders;
+public class NurseService implements NursePort {
 
-    public NurseService(List<Patient> patients, List<MedicalOrder> orders) {
-        this.patients = patients;
-        this.orders = orders;
+    private final NursePort nursePort;
+
+    public NurseService(NursePort nursePort) {
+        this.nursePort = nursePort;
     }
 
-    // Registrar visita
-    public void registerVisit(String patientId, Visit visit) {
-    for (Patient p : patients) {
-        if (p.getIdCard().equals(patientId)) {   // antes era getId()
-            p.addVisit(visit);
-            System.out.println("Visit registered for patient: " + p.getFullName()); // antes era getName()
-            return;
-        }
-    }
-    throw new IllegalArgumentException("Patient with ID " + patientId + " not found.");
-}
-
-
-    // Buscar orden médica
-    public MedicalOrder findOrder(String orderId) {
-        for (MedicalOrder order : orders) {
-            if (order.getOrderId().equals(orderId)) {
-                return order;
-            }
-        }
-        throw new IllegalArgumentException("Order with ID " + orderId + " not found.");
+    @Override
+    public void recordVitalSigns(String patientIdCard, LocalDateTime at, String bloodPressure, String temperature,
+                                 String pulse, String oxygenLevel) throws Exception {
+        nursePort.recordVitalSigns(patientIdCard, at, bloodPressure, temperature, pulse, oxygenLevel);
     }
 
-    // Buscar paciente
-    public Patient findPatient(String patientId) {
-        for (Patient p : patients) {
-            if (p.getIdCard().equals(patientId)) {
-                return p;
-            }
-        }
-        throw new IllegalArgumentException("Patient with ID " + patientId + " not found.");
+    @Override
+    public void recordAdministeredMedication(String patientIdCard, LocalDateTime at, String orderNumber, int itemNumber,
+                                             String medicationName, String dose) throws Exception {
+        nursePort.recordAdministeredMedication(patientIdCard, at, orderNumber, itemNumber, medicationName, dose);
+    }
+
+    @Override
+    public void recordPerformedProcedure(String patientIdCard, LocalDateTime at, String orderNumber, int itemNumber,
+                                         String procedureName, String notes) throws Exception {
+        nursePort.recordPerformedProcedure(patientIdCard, at, orderNumber, itemNumber, procedureName, notes);
+    }
+
+    @Override
+    public void addObservation(String patientIdCard, LocalDateTime at, String observation) throws Exception {
+        nursePort.addObservation(patientIdCard, at, observation);
     }
 }
+
