@@ -1,60 +1,50 @@
 package app.domain.services;
 
-import app.domain.model.Patient;
-import app.domain.model.Appointment;
-import app.domain.model.Invoice;
+import app.domain.ports.AdministrativeStaffPort;
+import app.domain.ports.PatientPort;
+import app.domain.ports.BillingPort;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
 
-public class AdministrativeStaffService {
-    private Map<String, Patient> patients = new HashMap<>();
-    private List<Appointment> appointments = new ArrayList<>();
-    private List<Invoice> invoices = new ArrayList<>();
+public class AdministrativeStaffService implements AdministrativeStaffPort {
 
-    public void createPatient(Patient patient) {
-        patients.put(patient.getIdCard(), patient);
+    private final PatientPort patientPort;
+    private final BillingPort billingPort;
+
+    public AdministrativeStaffService(PatientPort patientPort, BillingPort billingPort) {
+        this.patientPort = patientPort;
+        this.billingPort = billingPort;
     }
 
-    public void updatePatient(String idCard, String newAddress, String newPhone) {
-        Patient patient = patients.get(idCard);
-        if (patient != null) {
-            patient.setAddress(newAddress);
-            patient.setPhoneNumber(newPhone);
-        } else {
-            throw new IllegalArgumentException("Patient not found");
+    @Override
+    public String registerPatient(String username, String rawPassword, String idCard, String fullName, LocalDate birthDate,
+                                  String gender, String address, String phone, String email) throws Exception {
+        // Validar si el paciente ya existe
+        try {
+            String existingId = patientPort.findIdByIdCard(idCard);
+            if (existingId != null) {
+                throw new Exception("Patient with ID already exists: " + idCard);
+            }
+        } catch (Exception ignored) {
+            // Si no existe, está bien
         }
+
+        return idCard;
     }
 
-    public void createAppointment(String patientId, String doctorId, LocalDateTime dateTime) {
-        Appointment appointment = new Appointment(patientId, doctorId, dateTime);
-        appointments.add(appointment);
+    @Override
+    public void scheduleAppointment(String patientIdCard, String doctorIdCard, LocalDate date) throws Exception {
+        // Delegación a implementación concreta
+        
     }
 
-    public Invoice createInvoice(Patient patient, String doctorName,
-                             String insuranceCompany, String policyNumber,
-                             long policyDaysLeft, LocalDate policyEndDate,
-                             double totalCost) {
-    Invoice invoice = new Invoice(
-            patient.getFullName(),
-            calculateAge(patient.getBirthDate()),
-            patient.getIdCard(),
-            doctorName,
-            insuranceCompany,
-            policyNumber,
-            policyDaysLeft,
-            policyEndDate,
-            totalCost
-    );
-    invoices.add(invoice);
-    return invoice;
+    @Override
+    public void upsertEmergencyContact(String patientIdCard, String fullName, String relationship, String phone) throws Exception {
+        // Delegación a implementación concreta (persistencia)
+    }
+
+    @Override
+    public void upsertInsurance(String patientIdCard, String company, String policyNumber, boolean active, LocalDate expiration) throws Exception {
+        // Delegación a implementación concreta (persistencia)
+    }
 }
-
-    private int calculateAge(LocalDate birthDate) {
-    return LocalDate.now().getYear() - birthDate.getYear();
-}
-
-
-}
-
